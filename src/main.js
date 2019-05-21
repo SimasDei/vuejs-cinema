@@ -1,15 +1,19 @@
 import Vue from 'vue';
+import VueResource from 'vue-resource';
 
 import './style.scss';
 
 import MovieList from './components/MovieList.vue';
 import MovieFilter from './components/MovieFilter.vue';
 
+Vue.use(VueResource);
+
 new Vue({
   el: '#app',
   data: {
     genre: [],
     time: [],
+    movies: [],
   },
   methods: {
     checkFilter(category, genre, checked) {
@@ -26,5 +30,10 @@ new Vue({
   components: {
     MovieList,
     MovieFilter,
+  },
+  created() {
+    this.$http.get('/api').then(response => {
+      this.movies = response.body;
+    });
   },
 });

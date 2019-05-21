@@ -1,24 +1,27 @@
 <template>
   <div id="movie-list">
-    <div class="movie" v-for="(movie, index) in filteredMovies" :key="index">{{movie.title}}</div>
+    <div v-if="filteredMovies.length">
+      <movie-item
+        v-for="movie in filteredMovies"
+        :key="movie.id"
+        :movie="movie.movie"
+      >{{movie.movie.Title}}</movie-item>
+    </div>
+    <div class="no-results" v-else-if="movies.length">No Results.</div>
+    <div class="no-results" v-else>Loading...</div>
   </div>
 </template>
 <script>
 import genres from '../util/genres';
 
+import MovieItem from './MovieItem.vue';
+
 export default {
   name: 'movie-list',
-  data() {
-    return {
-      movies: [
-        { title: 'Pulp Fiction', genre: genres.DRAMA },
-        { title: 'The Great Lebowski', genre: genres.COMEDY },
-        { title: 'Beverly Hills Cop', genre: genres.COMEDY },
-        { title: 'Robocop', genre: genres.CRIME },
-      ],
-    };
+  components: {
+    MovieItem,
   },
-  props: ['genre', 'time'],
+  props: ['genre', 'time', 'movies'],
   computed: {
     filteredMovies() {
       return this.movies.filter(this.moviePassesGenreFilter);
@@ -28,7 +31,16 @@ export default {
     moviePassesGenreFilter(movie) {
       if (!this.genre.length) {
         return true;
-      } else return this.genre.find(genre => movie.genre === genre);
+      } else {
+        let movieGenres = movie.movie.Genre.split(', ');
+        let matched = true;
+        this.genre.forEach(genre => {
+          if (movieGenres.indexOf(genre) === -1) {
+            matched = false;
+          }
+        });
+        return matched;
+      }
     },
   },
 };
