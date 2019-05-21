@@ -3,10 +3,10 @@
   "version": "1.1.0",
   "description": "The Ultimate Vue.js Developers Course - Vue.js Cinema",
   "main": "server.js",
-  "author": "Anthony Gore <anthony@vuejsdevelopers.com>",
+  "author": "Simas Dei <simas@simas-dei.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vuejsdevelopers/vuejs-cinema"
+    "url": "https://github.com/SimasDei/vuejs-cinema"
   },
   "license": "UNLICENSED",
   "scripts": {
