@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 import Moment from 'moment-timezone';
 import VueRouter from 'vue-router';
+import Tooltip from './util/tooltip';
 
 Moment.tz.setDefault('UTC');
 Object.defineProperty(Vue.prototype, '$moment', {
@@ -25,6 +26,7 @@ Object.defineProperty(Vue.prototype, '$bus', {
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
+Vue.use(Tooltip);
 
 new Vue({
   el: '#app',
