@@ -11,7 +11,7 @@ Object.defineProperty(Vue.prototype, '$moment', {
 });
 
 import './style.scss';
-import { checkFilter } from './util/bus';
+import { checkFilter, setDay } from './util/bus';
 import routes from './util/routes';
 
 const router = new VueRouter({ routes });
@@ -42,5 +42,6 @@ new Vue({
       this.movies = response.body;
     });
     this.$bus.$on('check-filter', checkFilter.bind(this));
+    this.$bus.$on('set-day', setDay.bind(this));
   },
 });
