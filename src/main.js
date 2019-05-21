@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 import Moment from 'moment-timezone';
+import VueRouter from 'vue-router';
 
 Moment.tz.setDefault('UTC');
 Object.defineProperty(Vue.prototype, '$moment', {
@@ -11,11 +12,9 @@ Object.defineProperty(Vue.prototype, '$moment', {
 
 import './style.scss';
 import { checkFilter } from './util/bus';
+import routes from './util/routes';
 
-import MovieList from './components/MovieList.vue';
-import MovieFilter from './components/MovieFilter.vue';
-
-Vue.use(VueResource);
+const router = new VueRouter({ routes });
 
 const bus = new Vue();
 Object.defineProperty(Vue.prototype, '$bus', {
@@ -24,8 +23,12 @@ Object.defineProperty(Vue.prototype, '$bus', {
   },
 });
 
+Vue.use(VueResource);
+Vue.use(VueRouter);
+
 new Vue({
   el: '#app',
+  router,
   data: {
     genre: [],
     time: [],
@@ -33,10 +36,6 @@ new Vue({
     Moment,
     day: Moment(),
     bus,
-  },
-  components: {
-    MovieList,
-    MovieFilter,
   },
   created() {
     this.$http.get('/api').then(response => {
