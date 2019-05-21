@@ -1,12 +1,28 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource';
+import Moment from 'moment-timezone';
+
+Moment.tz.setDefault('UTC');
+Object.defineProperty(Vue.prototype, '$moment', {
+  get() {
+    return this.$root.Moment;
+  },
+});
 
 import './style.scss';
+import { checkFilter } from './util/bus';
 
 import MovieList from './components/MovieList.vue';
 import MovieFilter from './components/MovieFilter.vue';
 
 Vue.use(VueResource);
+
+const bus = new Vue();
+Object.defineProperty(Vue.prototype, '$bus', {
+  get() {
+    return this.$root.bus;
+  },
+});
 
 new Vue({
   el: '#app',
@@ -14,18 +30,9 @@ new Vue({
     genre: [],
     time: [],
     movies: [],
-  },
-  methods: {
-    checkFilter(category, genre, checked) {
-      if (checked) {
-        this[category].push(genre);
-      } else {
-        let index = this[category].indexOf(genre);
-        if (index > -1) {
-          this[category].splice(index, 1);
-        }
-      }
-    },
+    Moment,
+    day: Moment(),
+    bus,
   },
   components: {
     MovieList,
@@ -35,5 +42,6 @@ new Vue({
     this.$http.get('/api').then(response => {
       this.movies = response.body;
     });
+    this.$bus.$on('check-filter', checkFilter.bind(this));
   },
 });

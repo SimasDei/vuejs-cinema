@@ -1,7 +1,7 @@
 <template>
   <div :class="{'check-filter': true, 'active': checked}" @click="checkFilter">
     <span class="checkbox"></span>
-    <span class="check-filter-title">{{genre}}</span>
+    <span class="check-filter-title">{{title}}</span>
   </div>
 </template>
 <script>
@@ -11,11 +11,11 @@ export default {
       checked: false,
     };
   },
-  props: ['genre'],
+  props: ['title', 'category'],
   methods: {
     checkFilter() {
       this.checked = !this.checked;
-      this.$emit('check-filter', 'genre', this.genre, this.checked);
+      this.$emit('check-filter', this.category, this.title, this.checked);
     },
   },
 };
