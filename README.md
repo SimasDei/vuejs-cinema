@@ -87,22 +87,5 @@ If you're doing the *Vue.js Essentials - 3 Course Bundle* course on Udemy, you'l
 | 93 | video/37 |
 | 94 | video/38 |
 | 96 | video/40 |
-| 98 | video/42 |
-| 99 | video/43 |
-| 100 | video/44 |
-| 101 | video/45 |
-| 102 | video/46 |
-| 103 | video/47 |
-| 105 | video/49 |
-| 106 | video/50 |
-| 107 | video/51 |
-| 108 | video/52 |
-| 109 | video/53 |
-| 110 | video/54 |
-| 111 | video/55 |
-| 113 | video/57 |
-| 114 | video/58 |
-| 115 | video/59 |
-| 117 | video/61 |
-| 118 | video/62 |
+
 | 119 | video/63 |
